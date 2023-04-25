@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -19,13 +20,38 @@
         }
     </style>
 </head>
+
 <body>
     <div class="imgCont">
-        <img src="./img/img1.png">
-        <img src="./img/img2.png">
-        <img src="./img/img3.png">
-        <img src="./img/img4.png">
-        <img src="./img/img5.png">
+        <img src="./img/img1.png"onclick="imgContCopy(this)">
+        <img src="./img/img2.png"onclick="imgContCopy(this)">
+        <img src="./img/img3.png"onclick="imgContCopy(this)">
+        <img src="./img/img4.png"onclick="imgContCopy(this)">
+        <img src="./img/img5.png" onclick="imgContCopy(this)">
     </div>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"
+        integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+
+    <script>
+        function imgContCopy(imgCont_o) {
+            let pos = $(imgCont_o).offset();
+            let rnd1 = Math.round(Math.random() * 900 - 850);
+            let rnd2 = Math.round(Math.random() * 900 - 450);
+            let mov_top = pos.top - rnd1;
+            let mov_left = pos.left - rnd2;
+
+            $(imgCont_o)
+                .clone()//복제
+                .appendTo(".imgCont")
+                .css({ top: pos.top, left: pos.left, position: "absolute" })
+                .animate({ top: mov_top, left: mov_left }, 1000, function () {
+                    let img = this;
+                    setTimeout(function () {
+                        $(img).remove();
+                    }, 3000); //3초뒤에 제거
+                });
+        }
+    </script>
 </body>
+
 </html>
